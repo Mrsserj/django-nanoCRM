@@ -1,0 +1,20 @@
+{% load staticfiles %}
+
+<h1>{{ cal.customer.name }}</h1>
+<img height=100 src='/CRM/{{ MEDIA_URL }}{{ cal.customer.photo }}' alt='' />
+<table>
+	<tbody>
+	<tr>
+		<th>Название:</th>
+		<td>&nbsp;{{ cal.name }}</td>
+	</tr>
+	<tr>
+		<th>Время:</th>
+		<td>{{ cal.dt|date:'H:i' }}</td>
+	</tr>
+	<tr>
+		<th>Место:</th>
+		<td>{{ cal.place }}</td>
+	</tr>
+	</tbody>
+</table>

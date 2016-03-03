@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% load custom_filters %}
+
+{% block custom_head %}
+    <style>
+        .dark {background-color: #f5f5dc;}
+        .current { background-color: #b0e2ff; }
+        .events { list-style-type: none; padding-left: 1em;}
+        .tab-content {padding-top: 80px;}
+        .pnnav {float:right; margin-bottom: 10px; margin-top: 20px;}
+    </style>
+{% endblock %}
+{% block body %}
+    <div>
+        <div style="float:left;"><h3>{{ cal_date| date:"F Y" }}</h3></div>
+        <div class="btn-group pnnav">
+
+            <a href='{% url 'calendar' prev.year prev.month %}{% if customer %}?customer_id={{ customer.id }}{% endif %}' class="btn btn-success"><span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span></a>
+            <a href='{% url 'calendar' next.year next.month %}{% if customer %}?customer_id={{ customer.id }}{% endif %}' class="btn btn-success"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span></a>
+        </div>
+    </div>
+
+    <div class="tab-content">
+
+        <div class="tab-pane active" id="current">
+            <table class='table' >
+                <thead>
+                <tr>
+                    <th>Понедельник</th>
+                    <th>Вторник</th>
+                    <th>Среда</th>
+                    <th>Четверг</th>
+                    <th>Пятница</th>
+                    <th>Суббота</th>
+                    <th>Воскресенье</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for week in weeks %}
+                    <tr class='{% if customer %}_row{% endif %}'>
+                        {% for day in days %}
+                            {% get_day %}
+                        {% endfor %}
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <script>
+        //$('._row td').html('<span class="add_link"><a href=""><i class="glyphicon glyphicon-tag"></i></a></span>');
+        //$('.add_link').href();
+        $("[rel=tooltip]").tooltip({html:true});
+    </script>
+{% endblock %}

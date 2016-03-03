@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h2>Авторизация</h2>
+    <form id='id_form' class="form-horizontal well" method="POST" action="">
+    <table class="table">
+       {% csrf_token %}
+    {{ form }}
+    <tr>
+        <td></td>
+        <td><a href='#' id='id_submit' class="btn btn-warning"><span class="glyphicon glyphicon-road" aria-hidden="true"></span>&nbsp;Войти</a>
+        </td>
+    </tr>
+    </table>
+    </form>
+    <script>
+        $('#id_submit').click(function(){
+            $('#id_form').submit();
+        })
+    </script>
+{% endblock %}

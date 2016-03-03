@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <h3>Клиенты</h3>
+    <div class="tab-content">
+
+        <div class="tab-pane active" id="current">
+            <table class='table' >
+                <thead>
+                <tr>
+                    <th>Фото</th>
+                    <th>Имя</th>
+                    <th>Контакты</th>
+                    <th>События</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for customer in customers %}
+                    <tr>
+                        <td><img height=100 src={{ MEDIA_URL }}{{ customer.photo }} alt=""/></td>
+                        <td>{{ customer.name }}</td>
+                        <td>
+                            {% if customer.phone %}Телефон: {{ customer.phone }}<br/>{% endif %}
+                            {% if customer.mob_phone %}Сотовый: {{ customer.mob_phone }}<br/>{% endif %}
+                            {% if customer.other_phone %}Доп.телефон: {{ customer.other_phone }}<br/>{% endif %}
+                            {% if customer.email %}Эл.почта: {{ customer.email }}<br/>{% endif %}
+                            {% if customer.skype %}Skype: {{ customer.skype }}<br/>{% endif %}
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <a href="{% url 'customer' customer.id %}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>&nbsp;</a>
+                            <a href="{% url 'event' %}?customer_id={{ customer.id }}"><span class="glyphicon glyphicon-calendar" aria-hidden="true"></span>&nbsp;</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                    <tr>
+                        <td colspan="3">
+                        <td colspan="2"><a href='{% url 'customer' %}' class="btn btn-success"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span>&nbsp;Создать</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

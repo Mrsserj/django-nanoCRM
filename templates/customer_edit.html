@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+
+{% block custom_head %}
+    <script src='/{% static "js/jquery.maskedinput.js" %}'></script>
+{% endblock %}
+
+{% block body %}
+    <h2>Данные клиента:</h2>
+    <form id='id_form' class="form-horizontal well" method="POST" action="" enctype="multipart/form-data">
+    <table class="table">
+       {% csrf_token %}
+    {{ form }}
+    <tr>
+        <td></td>
+        <td><a href='#' id='id_submit' class="btn btn-warning"><span class="glyphicon glyphicon-floppy-disk" aria-hidden="true"></span>&nbsp;Сохранить</a>
+        <a href='{% url 'start' %}' id='id_back' class="btn btn-success"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>&nbsp;Закрыть</a></td>
+    </tr>
+    </table>
+    </form>
+    <script>
+        $('#id_submit').click(function(){
+            $('#id_form').submit();
+        })
+        $('input[name="mob_phone"]').mask("+7(9999)999-999");
+    </script>
+{% endblock %}
