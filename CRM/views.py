@@ -38,7 +38,7 @@ def calendar(request, year=None, month=None):
 @login_required
 def event_edit(request, event_pk=None):
     if request.GET.has_key('customer_id') and not request.GET.has_key('date'):
-        return redirect('/calendar/?customer_id='+request.GET['customer_id'])
+        return redirect('/?customer_id='+request.GET['customer_id'])
     elif not request.GET.has_key('customer_id') and request.GET.has_key('date'):
         return redirect('/?date='+request.GET['date'])
     elif request.GET.has_key('customer_id') and request.GET.has_key('date'):
